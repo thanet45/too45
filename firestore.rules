@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function adminAccess() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true;
+    }
+
+    // Admin role: assign manually in Firebase Console (not from the website).
+    match /admins/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow list, create, update, delete: if false;
+    }
+
+    match /predictions/{predictionId} {
+      allow read: if true;
+      allow create, update: if adminAccess()
+        && request.resource.data.keys().hasOnly(['period','signId','overview','work','money','love','health','score','updatedAt'])
+        && request.resource.data.keys().hasAll(['period','signId','overview','work','money','love','health','score','updatedAt'])
+        && request.resource.data.period in ['daily','weekly','monthly']
+        && request.resource.data.signId in ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']
+        && predictionId == request.resource.data.period + '_' + request.resource.data.signId
+        && request.resource.data.score is int
+        && request.resource.data.score >= 1 && request.resource.data.score <= 5
+        && request.resource.data.overview is string && request.resource.data.overview.size() <= 4000
+        && request.resource.data.work is string && request.resource.data.work.size() <= 4000
+        && request.resource.data.money is string && request.resource.data.money.size() <= 4000
+        && request.resource.data.love is string && request.resource.data.love.size() <= 4000
+        && request.resource.data.health is string && request.resource.data.health.size() <= 4000;
+      allow delete: if adminAccess();
+    }
+
+    match /settings/{id} {
+      allow read: if id == 'site';
+      allow create, update: if id == 'site' && adminAccess()
+        && request.resource.data.keys().hasOnly(['brand','title','subtitle','luckyNumbers','luckyColor','updatedAt'])
+        && request.resource.data.keys().hasAll(['brand','title','subtitle','luckyNumbers','luckyColor','updatedAt'])
+        && request.resource.data.brand is string && request.resource.data.brand.size() <= 200
+        && request.resource.data.title is string && request.resource.data.title.size() <= 200
+        && request.resource.data.subtitle is string && request.resource.data.subtitle.size() <= 200
+        && request.resource.data.luckyNumbers is string && request.resource.data.luckyNumbers.size() <= 200
+        && request.resource.data.luckyColor is string && request.resource.data.luckyColor.size() <= 200;
+      allow delete: if false;
+    }
+
+    match /articles/{articleId} {
+      allow read: if true;
+      allow create, update: if adminAccess()
+        && request.resource.data.keys().hasOnly(['title','body','icon','updatedAt'])
+        && request.resource.data.keys().hasAll(['title','body','icon','updatedAt'])
+        && request.resource.data.title is string && request.resource.data.title.size() <= 200
+        && request.resource.data.body is string && request.resource.data.body.size() <= 4000
+        && request.resource.data.icon is string && request.resource.data.icon.size() <= 200;
+      allow delete: if adminAccess();
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}

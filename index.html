@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#130923"><meta name="description" content="ดวงดาว Premium ดูดวง 12 ราศี รายวัน รายสัปดาห์ รายเดือน เปิดไพ่ทาโรต์ และเลขมงคล">
+  <title>ดวงดาว Premium | ดูดวงออนไลน์</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <div class="cosmos" aria-hidden="true"></div>
+  <header class="topbar"><div class="wrap topbar-inner">
+    <a class="brand" href="#home" data-view="home"><span class="brand-orb">✦</span><span><b id="brand-name">ดวงดาว<span class="gold">ออนไลน์</span></b><small>พยากรณ์ดวงชะตา · ไพ่ทาโรต์ · เลขมงคล</small></span></a>
+    <button class="mobile-menu" id="mobile-menu" aria-label="เปิดเมนู" aria-expanded="false">☰</button>
+    <nav class="nav" id="main-nav" aria-label="เมนูหลัก">
+      <button class="nav-item active" data-view="home">⌂ <span>หน้าแรก</span></button>
+      <button class="nav-item" data-view="daily">☼ <span>ดวงรายวัน</span></button>
+      <button class="nav-item" data-view="weekly">▦ <span>รายสัปดาห์</span></button>
+      <button class="nav-item" data-view="monthly">☾ <span>รายเดือน</span></button>
+      <button class="nav-item" data-view="zodiac">♈ <span>12 ราศี</span></button>
+      <button class="nav-item" data-view="tarot">✧ <span>ไพ่ทาโรต์</span></button>
+      <button class="nav-item" data-view="lucky">⑦ <span>เลขมงคล</span></button>
+      <button class="nav-item" data-view="articles">☷ <span>บทความ</span></button>
+      <button class="admin-nav" id="admin-open">⚙ แอดมิน</button>
+    </nav>
+  </div></header>
+  <main id="main-content">
+    <section class="hero wrap" id="hero"><div class="hero-zodiac" aria-hidden="true"><div class="wheel-outer"><span>♈</span><span>♉</span><span>♊</span><span>♋</span><span>♌</span><span>♍</span><span>♎</span><span>♏</span><span>♐</span><span>♑</span><span>♒</span><span>♓</span><i>✧</i></div></div><div class="hero-copy"><div class="eyebrow">✦ THE MAGIC OF THE STARS ✦</div><h1 id="hero-title">ดูดวง<span>ออนไลน์</span></h1><p id="hero-subtitle">พยากรณ์ดวงชะตา · การงาน · การเงิน · ความรัก · สุขภาพ</p><button class="btn gold-btn" data-view="zodiac">เริ่มดูดวงเลย <span>→</span></button></div><div class="hero-magic" aria-hidden="true"><div class="tarot-behind one">☀</div><div class="tarot-behind two">☾</div><div class="magic-ball">✦</div></div></section>
+    <section class="wrap shortcuts" id="shortcuts"><button data-view="daily"><span>▦</span><b>ดูดวงรายวัน</b><small>อัปเดตทุกวัน</small></button><button data-view="weekly"><span>▣</span><b>ดูดวงรายสัปดาห์</b><small>ภาพรวม 7 วัน</small></button><button data-view="monthly"><span>▤</span><b>ดูดวงรายเดือน</b><small>แนวโน้มทั้งเดือน</small></button><button data-view="zodiac"><span>♈</span><b>ดูดวง 12 ราศี</b><small>ครบทุกด้าน</small></button><button data-view="tarot"><span>✧</span><b>ไพ่ทาโรต์</b><small>ถาม–ตอบดวง</small></button><button data-view="lucky"><span>⑦</span><b>เลขมงคล</b><small>เสี่ยงโชค·เลขนำโชค</small></button><button data-view="zodiac"><span>♡</span><b>ดวงความรัก</b><small>คนโสด·คนมีคู่</small></button><button data-view="zodiac"><span>♧</span><b>ดวงการงาน</b><small>โอกาส·ความก้าวหน้า</small></button></section>
+    <section class="wrap content" id="view-content" aria-live="polite"></section>
+    <section class="wrap highlights"><b>✦ จุดเด่นของเว็บไซต์</b><span>▣ ใช้งานได้ทั้งมือถือและคอม</span><span>✎ แก้ไขเนื้อหาได้ผ่าน Admin</span><span>⌘ นำไปใช้บน GitHub Pages</span></section>
+  </main>
+  <footer class="footer wrap"><span>✦ <b>ดวงดาว PREMIUM</b> · เพื่อความบันเทิงและการสะท้อนตนเอง</span><span>ผลคำทำนายไม่ใช่คำแนะนำทางการเงิน การแพทย์ หรือการตัดสินใจสำคัญ</span></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="admin-dialog" class="admin-dialog"><div class="dialog-head"><div><small class="gold">ADMIN CONTROL PANEL</small><h2>⚙ จัดการเว็บไซต์</h2></div><button class="icon-button" id="close-dialog" aria-label="ปิด">✕</button></div><div id="admin-body"></div></dialog>
+</body></html>
